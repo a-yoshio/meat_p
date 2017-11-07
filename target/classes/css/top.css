@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+ body{
+ 	font-family: cursive;
+ 	color: #db7093;
+ 	background-color: #fffacd;
+ 	}
+ 
+ .header{
+ 	display: box;
+ 	width: 40%;
+ 	height: 50px;
+ }
+ 
+ .container{
+ 	display: block;
+ 	margin: 0 5%;
+ 	text-align: center;
+ }
+ 
+ h2{
+ 	color: #ff7f50;
+ 	background-color: #eee8aa;
+ 	margin-top: 0;
+ 	letter-spacing: 3px;
+ }
+ 
+ h3{
+ 	color: #8b0000;
+ }
+ .title-img{
+ 	margin-left:0;
+ }
+ 
+ .said-menu{
+ 	width: 20%;
+ 	height: 530px;
+ 	border: solid #e6dca1 3px;
+ 	background-color: #ffffe0;
+ 	margin-left: 0;
+ 	float: left;
+ 	text-align: center;
+ }
+ 
+ .main{
+ 	width: 60%;
+ 	float: left;
+ 	height: 530px;
+ 	margin-left: 10px;
+ 	text-align: center;
+ }
+ 
+ .illust-map-group{
+ 	display: box;
+ }
+ 
+.illust{
+	height: 200px;
+	width: auto;
+} @charset "UTF-8";

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.yoshino.meat_p.MeatMapper">
+    <select id="findByKeyWord" resultType="jp.co.yoshino.meat_p.domain.Meat">
+    	SELECT * from meat where e_name like #{key} or j_name like #{key}
+    </select>
+    <select id="findByLivestockIdAndPartId" resultType="jp.co.yoshino.meat_p.domain.Meat">
+        SELECT * from meat where livestock= #{livestockId} and part_id= #{partId}
+    </select>
+</mapper>
