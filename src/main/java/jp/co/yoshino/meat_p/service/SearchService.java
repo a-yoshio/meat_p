@@ -53,5 +53,15 @@ public class SearchService {
 			return conditionMatchList;
 	}
 	
+	/**
+	 * 畜種別、部位検索.
+	 * @param livestockId 畜種ID
+	 * @param partId　部位ID
+	 * @return　取得データ
+	 */
+	public List<Meat> findByLivestockAndPartId(int livestockId, String partId){
+		return meatrepository.findByLivestockAndPartId(livestockId, Integer.parseInt(partId));
+	}
+	
 
 }

@@ -21,4 +21,22 @@ public class APIController {
 	public List<Meat> findByKeyWordAndCondition(String livestockId, String hardLev, String keyword){
 		return searchService.findByKeyWordAndCondition(livestockId, hardLev, keyword);
 	}
+	
+	/**牛の部位検索*/
+	@RequestMapping("/beef")
+	public List<Meat> findByBeefPartId(String partId){
+		return searchService.findByLivestockAndPartId(0, partId);
+	}
+	
+	/**豚の部位検索*/
+	@RequestMapping("/pork")
+	public List<Meat> findByPorkPartId(String partId){
+		return searchService.findByLivestockAndPartId(1, partId);
+	}
+	
+	/**鶏の部位検索*/
+	@RequestMapping("/chiken")
+	public List<Meat> findByChikenPartId(String partId){
+		return searchService.findByLivestockAndPartId(2, partId);
+	}
 }
