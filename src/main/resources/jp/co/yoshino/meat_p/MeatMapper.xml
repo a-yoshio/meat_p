@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.yoshino.meat_p.MeatMapper">
     <select id="findByKeyWord" resultType="jp.co.yoshino.meat_p.domain.Meat">
-    	SELECT * FROM meat WHERE e_name like #{key} OR j_name like #{key}
+    	SELECT * FROM meat WHERE e_name like #{key} OR j_name like #{key} order by livestock, e_name
     </select>
     <select id="findByLivestockAndPartId" resultType="jp.co.yoshino.meat_p.domain.Meat">
         SELECT * FROM meat 
@@ -16,5 +16,9 @@
         		AND part_id= #{partId}
         	</if>
         </where>
+        order by e_name
+    </select>
+    <select id="findAllByLivestockId" resultType="jp.co.yoshino.meat_p.domain.Meat">
+    	SELECT * FROM meat WHERE livestock= #{livestock} order by e_name
     </select>
 </mapper>

@@ -13,4 +13,6 @@ public interface MeatMapper {
 	List<Meat> findByKeyWord(String key);
 	/**畜種ごと部位検索*/
 	List<Meat> findByLivestockAndPartId(PassData passdata);
+	/**畜種ごと全件検索*/
+	List<Meat> findAllByLivestockId(int livestock);
 }

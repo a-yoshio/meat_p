@@ -27,5 +27,10 @@ public class MeatRepository {
 		PassData passData= new PassData(livestock, partId);
 		return session.selectList("findByLivestockAndPartId", passData);
 	}
+	
+	/**畜種ごと全件検索*/
+	public List<Meat> findAllByLivestockId(int livestock){
+		return session.selectList("findAllByLivestockId", livestock);
+	}
 
 }

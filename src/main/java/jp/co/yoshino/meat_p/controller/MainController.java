@@ -12,4 +12,10 @@ public class MainController {
 	public String index() {
 		return "top";
 	}
+	
+	/**詳細を開く*/
+	@RequestMapping("/detail")
+	public String getDetail() {
+		return "detail";
+	}
 }

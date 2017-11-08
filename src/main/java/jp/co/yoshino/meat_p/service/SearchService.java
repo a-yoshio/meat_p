@@ -60,6 +60,9 @@ public class SearchService {
 	 * @return　取得データ
 	 */
 	public List<Meat> findByLivestockAndPartId(int livestockId, String partId){
+		if("".equals(partId)) {
+			return meatrepository.findAllByLivestockId(livestockId);
+		}
 		return meatrepository.findByLivestockAndPartId(livestockId, Integer.parseInt(partId));
 	}
 	
