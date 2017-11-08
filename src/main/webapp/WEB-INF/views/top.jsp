@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="template/nav.jsp" %>
 <body>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
 	<!-- header -->
 	<%@ include file="template/header.jsp" %>
 	<div class="container">
@@ -35,9 +36,9 @@
 		<div class="main">
 			<h2 class="search-title">部位サーチ</h2>
 			<div class="illust-map-group">
-				<img src="${pageContext.request.contextPath}/img/beef.png" name="beef" class="illust">
-				<img src="${pageContext.request.contextPath}/img/pork.png" name="pork" class="illust"><br>
-				<img src="${pageContext.request.contextPath}/img/chicken.png" name="chicken" class="illust">
+				<input type="image" src="${pageContext.request.contextPath}/img/beefMarkButton.png" name="beef" class="livestock-button" id="beef-button" value="beef">
+				<input type="image" src="${pageContext.request.contextPath}/img/porkMarkButton.png" name="pork" class="livestock-button" id="pork-button" value="pork"><br>
+				<input type="image" src="${pageContext.request.contextPath}/img/chikenMarkButton.png" name="chiken" class="livestock-button" id="chiken-button" value="chiken"><br>
 			</div>
 		</div>
 	</div>
