@@ -3,9 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.yoshino.meat_p.MeatMapper">
+<!-- キーワード検索 -->
     <select id="findByKeyWord" resultType="jp.co.yoshino.meat_p.domain.Meat">
     	SELECT * FROM meat WHERE e_name like #{key} OR j_name like #{key} order by livestock, e_name
     </select>
+<!-- 畜種ごと部位検索 -->
     <select id="findByLivestockAndPartId" resultType="jp.co.yoshino.meat_p.domain.Meat">
         SELECT * FROM meat 
         <where>
@@ -18,7 +20,16 @@
         </where>
         order by e_name
     </select>
+<!-- 畜種ごと全検索 -->
     <select id="findAllByLivestockId" resultType="jp.co.yoshino.meat_p.domain.Meat">
     	SELECT * FROM meat WHERE livestock= #{livestock} order by e_name
     </select>
+<!-- meatID検索してお肉データ取得 -->
+	<select id="findByIdFromMeatTable" resultType="jp.co.yoshino.meat_p.domain.MeatData">
+		SELECT m.id id, m.e_name eName, m.j_name jName, p.part_name partName, h.name hardType, m.point point, m.picture picture, m.description description, l.e_name livestockEName FROM meat m INNER JOIN hard_level h ON m.hard_lev = h.id JOIN ${livestockName}_part p ON m.part_id = p.id JOIN livestock l ON m.livestock = l.id where m.id= #{meatId};
+	</select>
+<!-- 畜種名を畜種IDで取得 -->
+	<select id="findLivestockENameByLivestockId" resultType="String">
+		SELECT e_name from livestock where id= #{livestockId}
+	</select>
 </mapper>

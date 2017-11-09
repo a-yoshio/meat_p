@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.yoshino.meat_p.domain.Meat;
+import jp.co.yoshino.meat_p.domain.MeatData;
 import jp.co.yoshino.meat_p.domain.PassData;
+import jp.co.yoshino.meat_p.domain.PassDataForIndexDetail;
 
 @Repository
 @Transactional
@@ -32,5 +34,18 @@ public class MeatRepository {
 	public List<Meat> findAllByLivestockId(int livestock){
 		return session.selectList("findAllByLivestockId", livestock);
 	}
+	
+	/**畜種IDで畜種名を取得*/
+	public String findLivestockENameByLivestockId(int livestockId) {
+		return session.selectOne("findLivestockENameByLivestockId",livestockId);
+	}
+	
+	/**お肉IDで詳細情報を取得*/
+	public MeatData findByIdFromMeatTable(int meatId,String livestockName){
+		PassDataForIndexDetail passData= new PassDataForIndexDetail(livestockName,meatId);
+		System.out.println("お肉ID:"+meatId+" 畜種名:"+livestockName);
+		return session.selectOne("findByIdFromMeatTable", passData);
+	}
+	
 
 }

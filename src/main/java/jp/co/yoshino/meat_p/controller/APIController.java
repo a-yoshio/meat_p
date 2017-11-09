@@ -39,4 +39,5 @@ public class APIController {
 	public List<Meat> findByChikenPartId(String partId){
 		return searchService.findByLivestockAndPartId(2, partId);
 	}
+	
 }

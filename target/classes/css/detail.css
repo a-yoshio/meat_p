@@ -2,11 +2,56 @@
 
  table.detail-table{
 	background-color: #fffae0;
-	width: 80%;
+	width: 60%;
 	margin: 0 auto;
 }
 
+ td{
+ 	text-align: left;
+ }
+ 
+ .detail-headline{
+ 	font-size: 200%;
+ 	font-weight: 600;
+ 	text-align: left;
+ }
+ 
+ .detail-title{
+ 	font-size: 120%;
+ 	font-weight: 400;
+ 	color: tomato;
+ }
+ 
+ .detail-contents{
+ 	font-size: 120%;
+ 	color: #332480;
+ }
+ 
+ #subheadline{
+ 	font-size: 150%;
+ }
+ 
  button.return-button{
  	width: 100px;
  	margin: 0 auto;
+ }
+ 
+ #picture-td{
+ 	width: 50%;
+ }
+ .meat-picture{
+ 	width: 100%;
+ 	height: auto;
+ }
+ 
+ td.icon-td{
+ 	width: 30px;
+ }
+ 
+ #comment-title{
+ 	text-align: left;
+ }
+ 
+ .livestock-icon-block{
+ 	width: 20%;
  }

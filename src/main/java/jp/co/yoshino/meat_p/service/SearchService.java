@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.yoshino.meat_p.domain.Meat;
+import jp.co.yoshino.meat_p.domain.MeatData;
 import jp.co.yoshino.meat_p.repository.MeatRepository;
 
 @Service
@@ -66,5 +67,18 @@ public class SearchService {
 		return meatrepository.findByLivestockAndPartId(livestockId, Integer.parseInt(partId));
 	}
 	
-
+	
+	/**
+	 * お肉詳細をお肉IDで取得.
+	 * @param meatId お肉ID
+	 * @param livestockId　畜種ID
+	 * @return　詳細データ
+	 */
+	public MeatData findByIdFromMeatTable(String meatId, String livestockId) {
+		int intLivestockId= Integer.parseInt(livestockId);
+		String livestockName= meatrepository.findLivestockENameByLivestockId(intLivestockId);
+		int intMeatId= Integer.parseInt(meatId);
+		MeatData meat= meatrepository.findByIdFromMeatTable(intMeatId, livestockName);
+		return meat;
+	}
 }
