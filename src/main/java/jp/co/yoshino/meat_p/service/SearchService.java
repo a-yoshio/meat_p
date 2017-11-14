@@ -37,21 +37,30 @@ public class SearchService {
 			}
 		}
 		//指定された条件で絞る
+			List<Meat> matchLivestockList= new ArrayList<>();
+			List<Meat> matchHardLevList= new ArrayList<>();
 			for(Meat meat: conditionMatchList) {
 				//畜種指定があれば絞る
-				if(!("".equals(livestockId))){
-						if(meat.getLivestock() != Integer.parseInt(livestockId)) {
-							conditionMatchList.remove(meat);
-						}
-				}
-				//硬さ指定があれば絞る
-				if(!("".equals(hardLev))) {
-						if(meat.getHard_lev() != Integer.parseInt(hardLev)) {
-							conditionMatchList.remove(meat);
+				if("".equals(livestockId)){
+					matchLivestockList.add(meat);
+				}else{
+					if(meat.getLivestock() == Integer.parseInt(livestockId)) {
+						matchLivestockList.add(meat);
 						}
 				}
 			}
-			return conditionMatchList;
+			for(Meat meat: matchLivestockList) {
+				//硬さ指定があれば絞る
+				if("".equals(hardLev)) {
+					matchHardLevList.add(meat);
+				}else {
+					if(meat.getHard_lev() == Integer.parseInt(hardLev)) {
+						matchHardLevList.add(meat);
+					}
+				}
+			}
+	
+		return matchHardLevList;
 	}
 	
 	/**

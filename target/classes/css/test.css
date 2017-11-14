@@ -1,0 +1,12 @@
+@charset "UTF-8";
+div.mapArea{
+	display: block;
+	background-img: url("../img/beefMapRed.png");
+	}
+	
+area.part{
+	opacity: 0.6;
+	display: block;
+}
+
+}

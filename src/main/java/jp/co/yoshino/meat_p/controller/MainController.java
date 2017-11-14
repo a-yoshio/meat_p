@@ -25,4 +25,10 @@ public class MainController {
 		model.addAttribute("meat", searchService.findByIdFromMeatTable(meatId, livestockId));
 		return "detail";
 	}
+	
+	/**テストページ*/
+	@RequestMapping("/test")
+	public String getTest() {
+		return "test";
+	}
 }
