@@ -4,14 +4,24 @@ $(function(){
 	/**畜種名*/
 	Nowlivestock= null;
 	
-	/**畜種ボタンをマウスオーバーで変色*/
-	$(document).on('mouseenter','.livestock-button',function(){
-		$(this).css({'background-color':'sandybrown'});
-	});
-	$(document).on('mouseleave','.livestock-button',function(){
-		$(this).css({'background-color':''});
-	});
 
+	/**畜種ボタンクリックイベントメソッド*/
+	function livestockButtonEve(selecter){
+		Nowlivestock= $(selecter).val();
+		//部位検索マップの追加HTML
+		var appendText= '<div id="search-box">';
+		appendText+='<div id="map-box">';
+		appendText+='<img src="'+pathName+'img/'+Nowlivestock+'MapWhite.png" usemap="#'+Nowlivestock+'-map" id="'+Nowlivestock+'-map" alt="'+Nowlivestock+'お肉マップ"></div>';
+		appendText+='</div>';
+		$('.illust-map-group').empty().append(appendText);
+		var appendRetturnButton='<img src="'+pathName+'img/return_button.png" name="return" id="return">';
+		$('.return-button').empty().append(appendRetturnButton);
+		$('#map-box').css({'background-color': 'white', 'height': '55%'});
+		$('#result-box').css({'background-color': 'blurywood', 'height': 'auto'});
+		$('#return').css({'height': '80%', 'width': 'auto'})
+		$('#return-button').css({'height':'50px','cursor':'pointer'});
+	}
+	
 	/**部位マップ検索情報一覧作成、表示*/
 	function searchPart(livestockName, partId){
 		var appendTable='';
@@ -41,22 +51,36 @@ $(function(){
 		});
 	};
 	
-	/**畜種ボタンクリックイベントメソッド*/
-	function livestockButtonEve(selecter){
-		Nowlivestock= $(selecter).val();
-		//部位検索マップの追加HTML
-		var appendText= '<div id="search-box">';
-		appendText+='<div id="map-box">';
-		appendText+='<img src="'+pathName+'img/'+Nowlivestock+'MapWhite.png" usemap="#'+Nowlivestock+'-map" id="'+Nowlivestock+'-map" alt="'+Nowlivestock+'お肉マップ"></div>';
-		appendText+='</div>';
-		$('.illust-map-group').empty().append(appendText);
-		var appendRetturnButton='<img src="'+pathName+'img/return_button.png" name="return" id="return">';
-		$('.return-button').empty().append(appendRetturnButton);
-		$('#map-box').css({'background-color': 'white', 'height': '55%'});
-		$('#result-box').css({'background-color': 'blurywood', 'height': 'auto'});
-		$('#return').css({'height': '80%', 'width': 'auto'})
-		$('#return-button').css({'height':'50px','cursor':'pointer'});
-	}
+	/**検索条件用畜種名とボタンを取得*/
+	$.getJSON(pathName+'rest/allLivestock', function(data){
+		var appendText= '';
+		var appendButton= '';
+		$.each(data,function(i, livestockData){
+			appendText += '<input type="checkbox" name="'+livestockData.name+'" class="search-livestock" value="'+livestockData.id+'">'+livestockData.name+'<br>';
+			appendButton += '<input type="image" src="'+pathName+'img/'+livestockData.e_name+'MarkButton.png" name="'+livestockData.e_name+'" class="livestock-button" id="'+livestockData.e_name+'-button" value="'+livestockData.e_name+'">'
+		});
+		$('.search_livestock_block').empty().append(appendText);
+		$('.illust-map-group').empty().append(appendButton);
+	});
+	
+	/**かたさ条件取得*/
+	$.getJSON(pathName+'rest/allHardLevel', function(data){
+		var appendText='<select name="hard-level" id="search-hardLevel"> ';
+		appendText+= '<option value="" selected></option>';
+		$.each(data,function(i, hardLevelData){
+			appendText+= '<option name="hard-level"value="'+hardLevelData.id+'">'+hardLevelData.name+'</option>';
+		});
+		appendText+= '</select><br>';
+		$('.search_hardLevel_block').empty().append(appendText);
+	});
+
+	/**畜種ボタンをマウスオーバーで変色*/
+	$(document).on('mouseenter','.livestock-button',function(){
+		$(this).css({'background-color':'sandybrown'});
+	});
+	$(document).on('mouseleave','.livestock-button',function(){
+		$(this).css({'background-color':''});
+	});
 	
 	/**畜種ボタンクリック*/
 	$('.illust-map-group').on('click','#beef-button',function(){
@@ -75,7 +99,7 @@ $(function(){
 		searchPart(livestockName, "");
 	});
 	
-	/**戻るボタン*/
+	/**戻るボタン作成*/
 	$('.return-button').on('click','#return',function(){
 		//畜種ボタンの生成
 		var appendText='<input type="image" src="'+pathName+'/img/beefMarkButton.png" name="beef" class="livestock-button" id="beef-button" value="beef">';
@@ -115,25 +139,6 @@ $(function(){
 	$('.map-config').on('click','.chikenMap',function(){
 		var partId= $(this).attr("id");
 		searchPart(Nowlivestock, partId);
-	});
-	/**検索条件用畜種名とボタンを取得*/
-	$.getJSON(pathName+'rest/allLivestock', function(data){
-		var appendText= '';
-		$.each(data,function(i, livestockData){
-			appendText+= '<input type="checkbox" name="'+livestockData.name+'" class="search-livestock" value="'+livestockData.id+'">'+livestockData.name+'<br>';
-		});
-		$('.search_livestock_block').empty().append(appendText);
-	});
-	
-	/**かたさ条件取得*/
-	$.getJSON(pathName+'rest/allHardLevel', function(data){
-		var appendText='<select name="hard-level" id="search-hardLevel"> ';
-		appendText+= '<option value="" selected></option>';
-		$.each(data,function(i, hardLevelData){
-			appendText+= '<option name="hard-level"value="'+hardLevelData.id+'">'+hardLevelData.name+'</option>';
-		});
-		appendText+= '</select><br>';
-		$('.search_hardLevel_block').empty().append(appendText);
 	});
 	
 });	

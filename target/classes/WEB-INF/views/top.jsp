@@ -31,9 +31,6 @@
 		<div class="main">
 			<h2 class="search-title">部位サーチ</h2>
 			<div class="illust-map-group">
-				<input type="image" src="${pageContext.request.contextPath}/img/beefMarkButton.png" name="beef" class="livestock-button" id="beef-button" value="beef">
-				<input type="image" src="${pageContext.request.contextPath}/img/porkMarkButton.png" name="pork" class="livestock-button" id="pork-button" value="pork"><br>
-				<input type="image" src="${pageContext.request.contextPath}/img/chikenMarkButton.png" name="chiken" class="livestock-button" id="chiken-button" value="chiken"><br>
 			</div>
 			<div class="table-block"></div>
 			<div class="return-button"></div>
