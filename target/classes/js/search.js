@@ -4,13 +4,12 @@ $(function(){
 	
 	/**データ一覧作成メソッド*/
 	function appendText(data){
-			console.log(data);
 			var appendTable= '<table class="partNameTable"><tbody>';
 			for(var i= 0;i< data.length;i++){
 				appendTable+= '<tr data-href="'+pathName+'detail?meatId='+data[i].id+'&livestockId='+data[i].livestock+'" class="partNameTableTr"><td class="partNameTableTd">'+data[i].e_name+'</td><td class="partNameTableTd">'+data[i].j_name+'</td><td class="partNameTableTd"><img src="'+data[i].picture+'"class="partNameTablePicture"></td></tr>';
 			};
 			appendTable+='</tbody></table></div>';
-			$('.table-block').empty().append(appendTable);
+			$('.table-block').append(appendTable);
 			$('.table-block').css({'background-color': 'wheat'});
 			$('.partNameTable').css({'width':'100%'},{'background-color':'tan'});
 			$('.partNameTableTd').css({'width':'30%'},{'text-align':'left'},{'font-size': '60px'});
@@ -30,33 +29,38 @@ $(function(){
 	/**検索ボタンクリック*/
 	$('#search-button').on('click',function(){
 		//畜種検索
+		var selectLivestock= '';
 		var checkLivestockList= $('.search-livestock:checked').map(function(livestockId){
+			selectLivestock+= $(this).attr('name')+' ';
 			return $(this).val();
 		});
-		console.log(checkLivestockList);
 		$('.search-livestock:checked').prop('checked',false);
 		//かたさ検索
 		var hardLevel= $('#search-hardLevel').val();
+		var hardLevelText= $('#search-hardLevel option:selected').text();
 		//キーワード検索
 		var keyword= $("#search-keyword").val();
 		
 		//お肉データ取得
+		var appendConditionContents= '<h3 class="conditon-label">条件指定  ';
+		$('.table-block').empty();
+		//選択された畜種の数がなしか、ありか。
 		if(0 == checkLivestockList.size()){
 			$.getJSON(pathName+'rest/keyword',{'livestockId':'', 'hardLev':hardLevel, 'keyword':keyword},function(data){
 				appendText(data);
-//				$('.illust-map-group').empty().append('<h3 class="conditon-label">条件指定:なし</h3>');
-//				$('.conditon-label').css({'background-color':'#ffb6c1'},{'color':'black'});
-//				$('.illust-map-group').css({'height':'60px'});
+				appendConditionContents +='畜種：'+selectLivestock+' かたさ：'+hardLevelText+'<br> キーワード：'+keyword+'</h3>'; 
+				$('.illust-map-group').empty().append(appendConditionContents);
+				$('.illust-map-group').css({'height':'auto'},{'text-align':'left'});
 			});
 		}else{
 		$.each(checkLivestockList,function(index, livestockName){
 			$.getJSON(pathName+'rest/keyword',{'livestockId':livestockName, 'hardLev':hardLevel, 'keyword':keyword},function(data){
-				appendText(data);
-//				$('.illust-map-group').empty().append('<h3 class="conditon-label">条件指定: '+</h3>');
-//				$('.conditon-label').css({'background-color':'#ffb6c1'},{'color':'black'});
-//				$('.illust-map-group').css({'height':'60px'});
+					appendText(data);
 			});
 		});
+		appendConditionContents +='畜種：'+selectLivestock+' かたさ：'+hardLevelText+' キーワード：'+keyword+'</h3>'; 
+		$('.illust-map-group').empty().append(appendConditionContents);
+		$('.illust-map-group').css({'height':'auto'});
 		};
 	});
 });

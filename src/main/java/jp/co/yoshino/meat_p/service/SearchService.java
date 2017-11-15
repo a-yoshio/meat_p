@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.yoshino.meat_p.domain.HardLevelData;
+import jp.co.yoshino.meat_p.domain.LivestockData;
 import jp.co.yoshino.meat_p.domain.Meat;
 import jp.co.yoshino.meat_p.domain.MeatData;
 import jp.co.yoshino.meat_p.repository.MeatRepository;
@@ -89,5 +91,15 @@ public class SearchService {
 		int intMeatId= Integer.parseInt(meatId);
 		MeatData meat= meatrepository.findByIdFromMeatTable(intMeatId, livestockName);
 		return meat;
+	}
+	
+	/**畜種データ全件取得*/
+	public List<LivestockData> findAllLivestcokData(){
+		return meatrepository.findAllLivestockData();
+	}
+	
+	/**かたさデータ全件取得*/
+	public List<HardLevelData> findAllHardLevelData(){
+		return meatrepository.findAllHardLevelData();
 	}
 }

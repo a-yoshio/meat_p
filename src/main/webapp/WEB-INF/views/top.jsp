@@ -16,17 +16,11 @@
 			<form action="${pageContext.request.contextPath}/search">
 			<h3 class="sub-title">条件検索</h3>
 			<h4 class="sub-menu">畜種</h4>
-				<input type="checkbox" name="live-stock" class="search-livestock" value="0">牛肉<br>
-				<input type="checkbox" name="live-stock" class="search-livestock" value="1">豚肉<br>
-				<input type="checkbox" name="live-stock" class="search-livestock" value="2">鶏肉<br>
+				<div class="search_livestock_block">
+				</div>
 			<h4 class="sub-menu">硬さ</h4>
-				<select name="hard-level" id="search-hardLevel">
-					<option value="" selected></option>
-					<option value="0">やわらかめ</option>
-					<option value="1">ふつう</option>
-					<option value="2">かため</option>
-					<option value="3">骨付き</option>
-				</select><br>
+			<div class="search_hardLevel_block">
+			</div>
 			<h3 class="sub-title">キーワード検索</h3>
 			<input name="keyword" id="search-keyword"/><br>
 			<br>

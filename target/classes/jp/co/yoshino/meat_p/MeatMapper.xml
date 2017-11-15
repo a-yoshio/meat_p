@@ -32,4 +32,12 @@
 	<select id="findLivestockENameByLivestockId" resultType="String">
 		SELECT e_name from livestock where id= #{livestockId}
 	</select>
+<!-- livestockテーブルから全件検索-->
+	<select id="findAllLivestockData" resultType="jp.co.yoshino.meat_p.domain.LivestockData">
+		SELECT * from livestock
+	</select>
+<!-- hard_levelテーブルから全件検索-->
+	<select id="findAllHardLevelData" resultType="jp.co.yoshino.meat_p.domain.HardLevelData">
+		SELECT * from hard_level
+	</select>
 </mapper>

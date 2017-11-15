@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import jp.co.yoshino.meat_p.domain.HardLevelData;
+import jp.co.yoshino.meat_p.domain.LivestockData;
 import jp.co.yoshino.meat_p.domain.Meat;
 import jp.co.yoshino.meat_p.domain.MeatData;
 import jp.co.yoshino.meat_p.domain.PassData;
@@ -47,5 +49,13 @@ public class MeatRepository {
 		return session.selectOne("findByIdFromMeatTable", passData);
 	}
 	
-
+	/**livestockData全件取得*/
+	public List<LivestockData> findAllLivestockData(){
+		return session.selectList("findAllLivestockData");
+	}
+	
+	/**hardLevelData全件取得*/
+	public List<HardLevelData> findAllHardLevelData(){
+		return session.selectList("findAllHardLevelData");
+	}
 }

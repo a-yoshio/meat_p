@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import jp.co.yoshino.meat_p.domain.HardLevelData;
+import jp.co.yoshino.meat_p.domain.LivestockData;
 import jp.co.yoshino.meat_p.domain.Meat;
 import jp.co.yoshino.meat_p.domain.MeatData;
 import jp.co.yoshino.meat_p.domain.PassData;
@@ -21,4 +23,8 @@ public interface MeatMapper {
 	MeatData findByIdFromMeatTable(PassDataForIndexDetail passDataForIndexDetail);
 	/**畜種名をIDで取得*/
 	String findLivestockENameByLivestockId(int livestockId);
+	/**畜種情報全件検索*/
+	List<LivestockData> findAllLivestockData();
+	/**かたさ情報全件検索*/
+	List<HardLevelData> findAllHardLevelData();
 }

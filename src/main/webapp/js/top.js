@@ -116,5 +116,24 @@ $(function(){
 		var partId= $(this).attr("id");
 		searchPart(Nowlivestock, partId);
 	});
+	/**検索条件用畜種名とボタンを取得*/
+	$.getJSON(pathName+'rest/allLivestock', function(data){
+		var appendText= '';
+		$.each(data,function(i, livestockData){
+			appendText+= '<input type="checkbox" name="'+livestockData.name+'" class="search-livestock" value="'+livestockData.id+'">'+livestockData.name+'<br>';
+		});
+		$('.search_livestock_block').empty().append(appendText);
+	});
+	
+	/**かたさ条件取得*/
+	$.getJSON(pathName+'rest/allHardLevel', function(data){
+		var appendText='<select name="hard-level" id="search-hardLevel"> ';
+		appendText+= '<option value="" selected></option>';
+		$.each(data,function(i, hardLevelData){
+			appendText+= '<option name="hard-level"value="'+hardLevelData.id+'">'+hardLevelData.name+'</option>';
+		});
+		appendText+= '</select><br>';
+		$('.search_hardLevel_block').empty().append(appendText);
+	});
 	
 });	

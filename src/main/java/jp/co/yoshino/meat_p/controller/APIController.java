@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.yoshino.meat_p.domain.HardLevelData;
+import jp.co.yoshino.meat_p.domain.LivestockData;
 import jp.co.yoshino.meat_p.domain.Meat;
 import jp.co.yoshino.meat_p.service.SearchService;
 
@@ -38,6 +40,18 @@ public class APIController {
 	@RequestMapping("/chiken")
 	public List<Meat> findByChikenPartId(String partId){
 		return searchService.findByLivestockAndPartId(2, partId);
+	}
+	
+	/**畜種データ全件取得*/
+	@RequestMapping("/allLivestock")
+	public List<LivestockData> getLivestockData(){
+		return searchService.findAllLivestcokData();
+	}
+	
+	/**かたさデータ全件取得*/
+	@RequestMapping("/allHardLevel")
+	public List<HardLevelData> getHardLevelData(){
+		return searchService.findAllHardLevelData();
 	}
 	
 }
