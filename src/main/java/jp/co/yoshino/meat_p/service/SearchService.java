@@ -10,6 +10,7 @@ import jp.co.yoshino.meat_p.domain.HardLevelData;
 import jp.co.yoshino.meat_p.domain.LivestockData;
 import jp.co.yoshino.meat_p.domain.Meat;
 import jp.co.yoshino.meat_p.domain.MeatData;
+import jp.co.yoshino.meat_p.domain.Part;
 import jp.co.yoshino.meat_p.repository.MeatRepository;
 
 @Service
@@ -101,5 +102,15 @@ public class SearchService {
 	/**かたさデータ全件取得*/
 	public List<HardLevelData> findAllHardLevelData(){
 		return meatrepository.findAllHardLevelData();
+	}
+	
+	/**部位データ全件取得*/
+	public List<Part> findAllPart(String livestockName){
+		return meatrepository.findAllPart(livestockName);
+	}
+	
+	/**部位データを部位IDで検索*/
+	public Part findPartByPartId(String livestockName, String partId){
+		return meatrepository.findPartByPartId(livestockName, partId);
 	}
 }

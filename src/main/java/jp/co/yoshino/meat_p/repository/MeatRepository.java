@@ -1,6 +1,8 @@
 package jp.co.yoshino.meat_p.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import jp.co.yoshino.meat_p.domain.HardLevelData;
 import jp.co.yoshino.meat_p.domain.LivestockData;
 import jp.co.yoshino.meat_p.domain.Meat;
 import jp.co.yoshino.meat_p.domain.MeatData;
+import jp.co.yoshino.meat_p.domain.Part;
 import jp.co.yoshino.meat_p.domain.PassData;
 import jp.co.yoshino.meat_p.domain.PassDataForIndexDetail;
 
@@ -57,5 +60,20 @@ public class MeatRepository {
 	/**hardLevelData全件取得*/
 	public List<HardLevelData> findAllHardLevelData(){
 		return session.selectList("findAllHardLevelData");
+	}
+	
+	/**部位データ全件取得*/
+	public List<Part> findAllPart(String livestockName){
+        Map<String,String> map= new HashMap<>();
+        map.put("tableName",livestockName+"_part");
+        return session.selectList("findAllPart", map);
+    }
+	
+	/**部位IDで部位テーブルを検索*/
+	public Part findPartByPartId(String livestockName, String partId) {
+		Map<String, String> map= new HashMap<>();
+		map.put("tableName", livestockName+"_part");
+		map.put("partId", partId);
+		return session.selectOne("findPartByPartId", map);
 	}
 }

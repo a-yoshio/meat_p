@@ -40,4 +40,12 @@
 	<select id="findAllHardLevelData" resultType="jp.co.yoshino.meat_p.domain.HardLevelData">
 		SELECT * from hard_level
 	</select>
+<!-- 部位データ全件検索 -->
+	<select id="findAllPart" resultType="jp.co.yoshino.meat_p.domain.Part" parameterType="map">
+        SELECT * from ${tableName} 
+    </select>
+<!-- 部位IDから部位テーブル内のデータ検索 -->
+	<select id="findPartByPartId" resultType="jp.co.yoshino.meat_p.domain.Part" parameterType="map">
+		SELECT * from ${tableName} where id= ${partId}
+	</select>
 </mapper>

@@ -7,7 +7,7 @@
 	<div class="container">
 	<div class="mapArea">
 		<img src="/meat_pat/img/beefMapWhite.png" alt="beefお肉マップ" usemap="#beef-map" id="beef-map">
-		<map name="beef-map"> <area shape="poly" coords="93,59,74,79,89,87,105,67,105,67" onmouseover="mouseover('neck')" onmouseout="mouseout()" alt="neck" class="part" id="neck"></map>
+		<map name="beef-map"> <area shape="poly" coords="93,59,74,79,89,87,105,67,105,67" onmouseover="mouseover('neck')" alt="neck" class="part" id="neck"></map>
 	</div>
 	</div>
 	<script>

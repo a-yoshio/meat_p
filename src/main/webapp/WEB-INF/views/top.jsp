@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="template/nav.jsp" %>
 <body>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
-	<script src="${pageContext.request.contextPath}/js/search.js"></script>
 	<!-- header -->
 	<%@ include file="template/header.jsp" %>
 	<div class="container">
@@ -38,14 +36,25 @@
 	</div>
 	<div class="map-config">
 		<map name="beef-map">
-			<area shape="poly" coords="93,59,74,79,89,87,105,67,105,67" alt="chack" class="beefMap" id="0"/>
 		</map>
 		<map name="pork-map">
-			
 		</map>
 		<map name="chiken-map">
-			 
 		</map>
 	</div>
+	<script>
+		/**コンテキストパス取得*/
+		var pathName= location.pathname;
+		/**部位マップにロールオーバーしたときの挙動*/
+		function mapMouseover(partName, Nowlivestock){
+			console.log(pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'_'+partName+'Map.png');
+			$('#'+Nowlivestock+'-map').attr('src',pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'_'+partName+'Map.png');
+		}
+		function mapMouseout(){
+			$('#'+Nowlivestock+'-map').attr('src',pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'MapWhite.png');
+		}
+	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
+	<script src="${pageContext.request.contextPath}/js/search.js"></script>
 </body>
 </html>
