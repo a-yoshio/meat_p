@@ -42,18 +42,6 @@
 		<map name="chiken-map">
 		</map>
 	</div>
-	<script>
-		/**コンテキストパス取得*/
-		var pathName= location.pathname;
-		/**部位マップにロールオーバーしたときの挙動*/
-		function mapMouseover(partName, Nowlivestock){
-			console.log(pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'_'+partName+'Map.png');
-			$('#'+Nowlivestock+'-map').attr('src',pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'_'+partName+'Map.png');
-		}
-		function mapMouseout(){
-			$('#'+Nowlivestock+'-map').attr('src',pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'MapWhite.png');
-		}
-	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
 	<script src="${pageContext.request.contextPath}/js/search.js"></script>
 </body>

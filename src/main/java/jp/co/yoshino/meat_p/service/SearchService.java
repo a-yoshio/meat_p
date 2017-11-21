@@ -111,6 +111,9 @@ public class SearchService {
 	
 	/**部位データを部位IDで検索*/
 	public Part findPartByPartId(String livestockName, String partId){
+		if("".equals(partId)) {
+			return null;
+		}
 		return meatrepository.findPartByPartId(livestockName, partId);
 	}
 }

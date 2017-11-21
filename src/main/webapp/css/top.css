@@ -49,7 +49,6 @@
  	margin-left: 10px;
  	text-align: center;
  }
- 
  .illust-map-group{
  	display: box;
  }
@@ -59,4 +58,31 @@
 	width: auto;
 }
 
+.map-box{
+	position: relative;
+	height: 55%;
+	background-color: #2f4f4f;
+	color: rgba(255,255,255,0.6);
+	font-size: 30px;
+	font-family: cursive, "游ゴシック", sans-serif;
 }
+
+#part-headline{
+	width: 100%;
+	height: auto;
+}
+#result-box{
+	background-color: blurywood;
+	height: auto;
+}
+
+#return{
+	height: 80%;
+	width: auto;
+	cursor: pointer;
+}
+
+#return-button{
+	height: 50px;
+}
+

@@ -1,5 +1,5 @@
 $(function(){
-	/**コンテキストパス取得*/
+/**コンテキストパス取得*/
 	var pathName= location.pathname;
 	/**畜種名*/
 	Nowlivestock= null;
@@ -9,9 +9,9 @@ $(function(){
 	function livestockButtonEve(selecter){
 		Nowlivestock= $(selecter).val();
 		//部位マップ(白)の追加
-		var appendText= '<div id="search-box">';
-		appendText+='<div id="map-box">';
-		appendText+='<img src="'+pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'MapWhite.png" usemap="#'+Nowlivestock+'-map" id="'+Nowlivestock+'-map" alt="'+Nowlivestock+'お肉マップ"></div>';
+		var appendText='<div class="map-box">';
+		appendText+='<div id="part-title"><p style="display:inline">selectPart：</p><span id="part-name">全部</span></div>';
+		appendText+='<img src="'+pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'MapWhite.png" usemap="#'+Nowlivestock+'-map" id="'+Nowlivestock+'-map" alt="'+Nowlivestock+'お肉マップ">';
 		appendText+='</div>';
 		$('.illust-map-group').empty().append(appendText);
 		//戻るボタンの追加
@@ -21,17 +21,11 @@ $(function(){
 		var appendMap= '<map name="'+Nowlivestock+'-map">';
 		$.getJSON(pathName+'rest/AllPartData',{'livestockName': Nowlivestock},function(partDataList){
 			$.each(partDataList,function(i,partData){
-				var eName = '\''+partData.e_name+'\'';
-				var livetockName='\''+Nowlivestock+'\'';
-				appendMap+='<area shape="'+partData.map_shape+'" coords="'+partData.map_coords+'" alt="chack" class="'+Nowlivestock+'-map" id="'+partData.id+'" value="'+eName+'" onmouseover="mapMouseover('+eName+','+livetockName+')"/>';
+				appendMap+='<area shape="'+partData.map_shape+'" coords="'+partData.map_coords+'" alt="chack" class="'+Nowlivestock+'-map" id="'+partData.id+'"/>';
 			});
 			appendMap+= '</map>';
 			$('.map-config').empty().append(appendMap);
 		});
-		$('#map-box').css({'background-color': 'white', 'height': '55%'});
-		$('#result-box').css({'background-color': 'blurywood', 'height': 'auto'});
-		$('#return').css({'height': '80%', 'width': 'auto'})
-		$('#return-button').css({'height':'50px','cursor':'pointer'});
 	};
 	
 	/**部位マップ検索情報一覧作成、表示メソッド*/
@@ -51,7 +45,7 @@ $(function(){
 			$('.partNameTableTd').css({'width':'30%'},{'text-align':'left'},{'font-size': '60px'});
 			$('.partNameTablePicture').css({'width':'80px'},{'height':'auto'});
 			//テーブルの行をクリックするとリンク先へ飛べるコード
-			$('tbody tr[data-href]').addClass('clickable').click( function() {
+			$('tbody tr[data-href]').addClass('clickable').click(function() {
 				window.location = $(this).attr('data-href');
 				}).find('a').hover( function() {
 				$(this).parents('tr').unbind('click');
@@ -64,13 +58,12 @@ $(function(){
 	};
 	
 	/**partIdから部位データを取得するメソッド*/
-	function getPartData(partId){
+		function getPartData(partId){
 		$.getJSON(pathName+'rest/findPartByPartId',{'livestockName': Nowlivestock, 'partId':partId}, function(data){
+			console.log(data+"部位データが返ってくる");
 			return data;
 		});
 	};
-	
-	
 	
 	/**検索条件用畜種名とボタンを取得*/
 	$.getJSON(pathName+'rest/allLivestock', function(data){
@@ -120,7 +113,7 @@ $(function(){
 		searchPart(livestockName, "");
 	});
 	
-	/**戻るボタン作成*/
+	/**戻るボタンクリック*/
 	$('.return-button').on('click','#return',function(){
 		//畜種ボタンの生成
 		var appendText='<input type="image" src="'+pathName+'/img/beefMarkButton.png" name="beef" class="livestock-button" id="beef-button" value="beef">';
@@ -142,24 +135,31 @@ $(function(){
 		$(this).css({'background-color':''});
 	});
 	
+	/**イメージマップロールオーバー時の挙動メソッド*/
+	function roleoverOnImageMap(imageMapData){
+		var partId= $(imageMapData).attr("id");
+		searchPart(Nowlivestock, partId);//部位検索結果出力
+		$.getJSON(pathName+'rest/findPartByPartId',{'livestockName': Nowlivestock, 'partId':partId}, function(partData){
+			$('#'+Nowlivestock+'-map').attr('src',pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'_'+partData.e_name+'Map.png');//マップの色変更
+			$('#part-name').text(partData.part_name);//選択部位名を表示
+		});
+	};
 	
-	/**部位マップをクリックすると部位検索結果が下に表示される*/
+	/**畜種ごと部位マップをロールオーバー*/
 	//牛
 	$('.map-config').on('mouseenter','.beef-map',function(){
-		var partId= $(this).attr("id");
-		searchPart(Nowlivestock, partId);
+		roleoverOnImageMap(this);
 	});
 	
 	//豚
 	$('.map-config').on('mouseenter','.pork-map',function(){
-		var partId= $(this).attr("id");
-		searchPart(Nowlivestock, partId);
+		roleoverOnImageMap(this);
 	});
 	
 	//鶏
-	$('.map-config').on('click','.chikenMap',function(){
-		var partId= $(this).attr("id");
-		searchPart(Nowlivestock, partId);
+	$('.map-config').on('mouseenter','.chiken-map',function(){
+		console.log(this);
+		roleoverOnImageMap(this);
 	});
 	
 });

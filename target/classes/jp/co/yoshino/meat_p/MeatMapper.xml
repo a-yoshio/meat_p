@@ -46,6 +46,11 @@
     </select>
 <!-- 部位IDから部位テーブル内のデータ検索 -->
 	<select id="findPartByPartId" resultType="jp.co.yoshino.meat_p.domain.Part" parameterType="map">
-		SELECT * from ${tableName} where id= ${partId}
+		SELECT * from ${tableName} 
+		<where>
+        	<if test="partId != null">
+        		id= ${partId}
+        	</if>
+        </where>
 	</select>
 </mapper>
