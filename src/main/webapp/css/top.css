@@ -59,6 +59,7 @@
 }
 
 .map-box{
+	border: inset 10px #8b4513;
 	position: relative;
 	height: 55%;
 	background-color: #2f4f4f;

@@ -1,15 +1,16 @@
 @charset "UTF-8";
 
- table.detail-table{
-	background-color: #fffae0;
-	width: 60%;
-	margin: 0 auto;
-}
-
- td{
- 	text-align: left;
+ #detail-table{
+ 	background-color: #f5f5f5;
+ 	margin: 0 20%;
+ 	width: 60%;
+ 	border-spacing: 10px 0;
  }
  
+ tr{
+ 	width: 100px;
+ }
+
  .detail-headline{
  	font-size: 200%;
  	font-weight: 600;
@@ -17,14 +18,32 @@
  }
  
  .detail-title{
+ 	width: 60px;
  	font-size: 120%;
  	font-weight: 400;
  	color: tomato;
  }
  
- .detail-contents{
- 	font-size: 120%;
+ .detail-td{
+ 	width: 100px;
+ 	margin: 0 10px;
+ }
+ 
+ #detail-meat-name{
+ 	font-size: 250%;
  	color: #332480;
+ 	font-weight: 600;
+ 	text-align: center;
+ 	margin-top: 0;
+ }
+ 
+ #detail-meat-property{
+ 	width: 120%;
+ 	color: #332480;
+ 	font-size: 150%;
+ 	text-align: left;
+ 	margin-top: 30px;
+ 	margin-left: 50px;
  }
  
  #subheadline{
@@ -38,20 +57,29 @@
  
  #picture-td{
  	width: 50%;
+ 	margin: 0 20px;
  }
  .meat-picture{
- 	width: 100%;
+ 	width: 300px;
  	height: auto;
  }
  
  td.icon-td{
- 	width: 30px;
+ 	width: 30%;
+ 	
  }
  
- #comment-title{
+ #comment-td{
  	text-align: left;
- }
+	 }
  
- .livestock-icon-block{
- 	width: 20%;
+ pre{
+ 	width: 80%;
+ 	height: auto;
+ 	overflow: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #332480;
+    text-align: left;
+    margin-left: 10%;
  }
