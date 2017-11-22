@@ -48,13 +48,17 @@ public class MeatRepository {
 	/**お肉IDで詳細情報を取得*/
 	public MeatData findByIdFromMeatTable(int meatId,String livestockName){
 		PassDataForIndexDetail passData= new PassDataForIndexDetail(livestockName,meatId);
-		System.out.println("お肉ID:"+meatId+" 畜種名:"+livestockName);
 		return session.selectOne("findByIdFromMeatTable", passData);
 	}
 	
 	/**livestockData全件取得*/
 	public List<LivestockData> findAllLivestockData(){
 		return session.selectList("findAllLivestockData");
+	}
+	
+	/**畜種名から畜種IDを検索*/
+	public String getLivestockId(int livestockId) {
+		return session.selectOne("getLivestockName", livestockId);
 	}
 	
 	/**hardLevelData全件取得*/
@@ -75,5 +79,10 @@ public class MeatRepository {
 		map.put("tableName", livestockName+"_part");
 		map.put("partId", partId);
 		return session.selectOne("findPartByPartId", map);
+	}
+	
+	/**畜種英名から畜種IDを取得*/
+	public Meat getMeatDataById(int meatId){
+		return session.selectOne("getMeatDataById", meatId);
 	}
 }

@@ -87,3 +87,33 @@
 	height: 50px;
 }
 
+#gray_panel{
+	background : #000000;
+	opacity  : 0.5;
+	width  : 100%;
+	height  : 100%;
+	position : absolute;
+	top   : 0;
+	left  : 0;
+	z-index  : 50;
+}
+
+#detail{
+	position: fixed;
+	top: 10%;
+	left: 30%;
+	background-color: rgba(255,255,255,100);	
+	width: 600px;
+	height: 500px;
+	z-index: 100;
+}
+
+#close-detail{
+	cursor: pointer;
+}
+
+#back-detail{
+	text-align: right;
+	cursor: pointer;
+}
+

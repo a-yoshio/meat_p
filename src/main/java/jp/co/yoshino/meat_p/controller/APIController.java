@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.yoshino.meat_p.domain.HardLevelData;
 import jp.co.yoshino.meat_p.domain.LivestockData;
 import jp.co.yoshino.meat_p.domain.Meat;
+import jp.co.yoshino.meat_p.domain.MeatData;
 import jp.co.yoshino.meat_p.domain.Part;
 import jp.co.yoshino.meat_p.service.SearchService;
 
@@ -65,5 +66,11 @@ public class APIController {
 	@RequestMapping("/findPartByPartId")
 	public Part findPartByPartId(String livestockName, String partId) {
 		return searchService.findPartByPartId(livestockName, partId);
+	}
+	
+	/**お肉データをIDで取得*/
+	@RequestMapping("/detail")
+	public MeatData getDetail(String meatId,String livestockId) {
+		return searchService.findByIdFromMeatTable(meatId, livestockId);
 	}
 }

@@ -19,7 +19,7 @@ public class Meat {
 	/**画像*/
 	private String picture;
 	/**説明文*/
-	private String descrioton;
+	private String description;
 	/**畜種*/
 	private int livestock;
 

@@ -13,6 +13,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!-- bootstrap.js -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<!--ImageMapsterプラグイン-->
-<script src="${pageContext.request.contextPath}/js/jquery.imagemapster.js"></script>
+<!-- jQueryUI -->
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 </head>

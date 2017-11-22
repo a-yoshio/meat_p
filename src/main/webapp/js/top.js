@@ -3,7 +3,6 @@ $(function(){
 	var pathName= location.pathname;
 	/**畜種名*/
 	Nowlivestock= null;
-	
 
 	/**畜種ボタンクリックしたときの動作メソッド*/
 	function livestockButtonEve(selecter){
@@ -11,7 +10,7 @@ $(function(){
 		//部位マップ(白)の追加
 		var appendText='<div class="map-box">';
 		appendText+='<div id="part-title"><p style="display:inline">selectPart：</p><span id="part-name">全部</span></div>';
-		appendText+='<img src="'+pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'MapWhite.png" usemap="#'+Nowlivestock+'-map" id="'+Nowlivestock+'-map" alt="'+Nowlivestock+'お肉マップ">';
+		appendText+='<img src="'+pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'MapWhite.png" usemap="#'+Nowlivestock+'-map" id="'+Nowlivestock+'-map" alt="'+Nowlivestock+'" class="livestock-map">';
 		appendText+='</div>';
 		$('.illust-map-group').empty().append(appendText);
 		//戻るボタンの追加
@@ -35,7 +34,8 @@ $(function(){
 		$.getJSON(pathName+'rest/'+livestockName, {'partId': partId}, function(data){
 				appendTable+= '<table class="partNameTable"><tbody>';
 				for(var i= 0;i< data.length;i++){
-					appendTable+= '<tr data-href="'+pathName+'detail?meatId='+data[i].id+'&livestockId='+data[i].livestock+'" class="partNameTableTr"><td class="partNameTableTd">'+data[i].e_name+'</td><td class="partNameTableTd">'+data[i].j_name+'</td><td class="partNameTableTd"><img src="'+data[i].picture+'"class="partNameTablePicture"></td></tr>';
+					appendTable+= '<tr class="partNameTableTr" id="'+data[i].id+'"><td class="partNameTableTd">';
+					appendTable+= data[i].e_name+'</td><td class="partNameTableTd">'+data[i].j_name+'<hidden id="livestockId" value="'+data[i].livestock+'"></td><td class="partNameTableTd"><img src="'+data[i].picture+'"class="partNameTablePicture"></td></tr>';
 				};
 			appendTable+='</tbody></table></div>';
 			$('.table-block').empty().append(appendTable);
@@ -44,17 +44,7 @@ $(function(){
 			$('.partNameTable').css({'width':'100%'},{'background-color':'tan'});
 			$('.partNameTableTd').css({'width':'30%'},{'text-align':'left'},{'font-size': '60px'});
 			$('.partNameTablePicture').css({'width':'80px'},{'height':'auto'});
-			//テーブルの行をクリックするとリンク先へ飛べるコード
-			$('tbody tr[data-href]').addClass('clickable').click(function() {
-				window.location = $(this).attr('data-href');
-				}).find('a').hover( function() {
-				$(this).parents('tr').unbind('click');
-				}, function() {
-				$(this).parents('tr').click( function() {
-				window.location = $(this).attr('data-href');
-				});
-				});
-			});
+		});
 	};
 	
 	/**partIdから部位データを取得するメソッド*/
@@ -135,6 +125,20 @@ $(function(){
 		$(this).css({'background-color':''});
 	});
 	
+	/**部位データ一覧クリック*/
+	$(document).on('click','.partNameTableTr',function(){
+		$('#detail').fadeIn('fast');
+		$('#gray_panel').fadeIn('fast');
+		$('#back-detail').fadeIn('fast');
+	});
+	
+	/**部位データ閉じるボタンクリック*/
+	$(document).on('click', '#back-detail',function(){
+		$('#detail').fadeOut('fast');
+		$('#gray_panel').fadeOut('fast');
+		$('#back-detail').fadeOut('fast');
+	});
+	
 	/**イメージマップロールオーバー時の挙動メソッド*/
 	function roleoverOnImageMap(imageMapData){
 		var partId= $(imageMapData).attr("id");
@@ -158,8 +162,23 @@ $(function(){
 	
 	//鶏
 	$('.map-config').on('mouseenter','.chiken-map',function(){
-		console.log(this);
 		roleoverOnImageMap(this);
+	});
+	
+	/**お肉一覧クリック：お肉詳細データポップアップ出力*/
+	$(document).on('click','.partNameTableTr',function(){
+		var meatId= $(this).attr("id");
+		var livestockId= $('hidden',this).attr('value');
+		$.getJSON(pathName+'rest/detail',{'meatId': meatId,'livestockId': livestockId},function(meatData){
+			console.log(meatData);
+			$('#meat-ename').text(meatData.eName);
+			$('#meat-jname').text(meatData.jName);
+			$('#meat-livestockname').text(meatData.livestockEName);
+			$('#meat-partname').text(meatData.partName);
+			$('#meat-hardname').text(meatData.hardType);
+			$('.meat-picture').attr('src',meatData.picture);
+			$('#meat-description').text(meatData.description);
+		});
 	});
 	
 });

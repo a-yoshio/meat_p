@@ -90,8 +90,7 @@ public class SearchService {
 		int intLivestockId= Integer.parseInt(livestockId);
 		String livestockName= meatrepository.findLivestockENameByLivestockId(intLivestockId);
 		int intMeatId= Integer.parseInt(meatId);
-		MeatData meat= meatrepository.findByIdFromMeatTable(intMeatId, livestockName);
-		return meat;
+		return meatrepository.findByIdFromMeatTable(intMeatId, livestockName);
 	}
 	
 	/**畜種データ全件取得*/
