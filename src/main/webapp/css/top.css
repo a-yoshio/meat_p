@@ -117,3 +117,15 @@
 	cursor: pointer;
 }
 
+#cookingMenu-block{
+	display: flex;
+	font-size: 10px;
+}
+
+#cookingMenu-Image{
+	display: flex;
+	width: 60px;	
+}
+.recipe-title{
+	width: 50px;
+} 

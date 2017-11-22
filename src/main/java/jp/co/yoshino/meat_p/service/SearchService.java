@@ -1,8 +1,15 @@
 package jp.co.yoshino.meat_p.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -114,5 +121,24 @@ public class SearchService {
 			return null;
 		}
 		return meatrepository.findPartByPartId(livestockName, partId);
+	}
+	
+	/**お肉名でクックパッドから料理データを取得*/
+	public Map<String,List<String>> getCookingMenu(String meatJName) throws IOException{
+		Document document= Jsoup.connect("https://cookpad.com/search/"+meatJName).get();
+		Elements elements= document.select("div.recipe-text a.recipe-title");
+		List<String> elementList= new ArrayList<>();
+		for(Element element: elements) {
+			elementList.add(element.toString());
+		}
+		Elements imageElements= document.select("div.recipe-image");
+		List<String> imageElementList= new ArrayList<>();
+		for(Element imageElement: imageElements) {
+			imageElementList.add(imageElement.toString());
+		}
+		Map<String, List<String>> map= new HashMap<>();
+		map.put("titleList", elementList);
+		map.put("imageElementList", imageElementList);
+		return map;
 	}
 }

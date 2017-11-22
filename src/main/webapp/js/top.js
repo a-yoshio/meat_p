@@ -55,6 +55,37 @@ $(function(){
 		});
 	};
 	
+	/**イメージマップロールオーバー時の挙動メソッド*/
+	function roleoverOnImageMap(imageMapData){
+		var partId= $(imageMapData).attr("id");
+		searchPart(Nowlivestock, partId);//部位検索結果出力
+		$.getJSON(pathName+'rest/findPartByPartId',{'livestockName': Nowlivestock, 'partId':partId}, function(partData){
+			$('#'+Nowlivestock+'-map').attr('src',pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'_'+partData.e_name+'Map.png');//マップの色変更
+			$('#part-name').text(partData.part_name);//選択部位名を表示
+		});
+	};
+	
+	/**クックパッドからスクレイピングして料理を取得するメソッド*/
+	function getCookingMenu(meatJName){
+		$.getJSON(pathName+'rest/cookingMenu',{'meatJName':meatJName},function(elementList){
+			console.log(elementList);
+			var appendText= '';
+			var appendImage= '';
+			var titleList= elementList.titleList;
+			var imageElementList= elementList.imageElementList;
+			$.each(imageElementList,function(i,data){
+				appendImage+= data;
+			});
+			$('#cookingMenu-Image').append(appendImage);
+			$.each(elementList,function(i,data){
+				appendText+= data;
+			});
+			$('#cookingMenu-block').append(appendText);
+		});
+	};
+	
+	//TODO なんかイメージがだぶっています。。
+	
 	/**検索条件用畜種名とボタンを取得*/
 	$.getJSON(pathName+'rest/allLivestock', function(data){
 		var appendText= '';
@@ -139,16 +170,6 @@ $(function(){
 		$('#back-detail').fadeOut('fast');
 	});
 	
-	/**イメージマップロールオーバー時の挙動メソッド*/
-	function roleoverOnImageMap(imageMapData){
-		var partId= $(imageMapData).attr("id");
-		searchPart(Nowlivestock, partId);//部位検索結果出力
-		$.getJSON(pathName+'rest/findPartByPartId',{'livestockName': Nowlivestock, 'partId':partId}, function(partData){
-			$('#'+Nowlivestock+'-map').attr('src',pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'_'+partData.e_name+'Map.png');//マップの色変更
-			$('#part-name').text(partData.part_name);//選択部位名を表示
-		});
-	};
-	
 	/**畜種ごと部位マップをロールオーバー*/
 	//牛
 	$('.map-config').on('mouseenter','.beef-map',function(){
@@ -170,7 +191,6 @@ $(function(){
 		var meatId= $(this).attr("id");
 		var livestockId= $('hidden',this).attr('value');
 		$.getJSON(pathName+'rest/detail',{'meatId': meatId,'livestockId': livestockId},function(meatData){
-			console.log(meatData);
 			$('#meat-ename').text(meatData.eName);
 			$('#meat-jname').text(meatData.jName);
 			$('#meat-livestockname').text(meatData.livestockEName);
@@ -178,7 +198,10 @@ $(function(){
 			$('#meat-hardname').text(meatData.hardType);
 			$('.meat-picture').attr('src',meatData.picture);
 			$('#meat-description').text(meatData.description);
+			getCookingMenu(meatData.jName);
 		});
 	});
+	
+	
 	
 });

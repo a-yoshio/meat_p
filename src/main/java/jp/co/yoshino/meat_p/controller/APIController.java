@@ -1,7 +1,9 @@
 package jp.co.yoshino.meat_p.controller;
 
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,5 +74,12 @@ public class APIController {
 	@RequestMapping("/detail")
 	public MeatData getDetail(String meatId,String livestockId) {
 		return searchService.findByIdFromMeatTable(meatId, livestockId);
+	}
+	
+	/**お肉名から料理をクックパッドから取得*/
+	@RequestMapping("/cookingMenu")
+	public Map<String, List<String>> getCookingMenu(String meatJName) throws IOException{
+		Map<String, List<String>> elementMap= searchService.getCookingMenu(meatJName);
+		return elementMap;
 	}
 }

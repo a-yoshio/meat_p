@@ -15,10 +15,12 @@
 						</tr>
 						<tr>
 							<td rowspan="2" id="picture-td" colspan="2"><img src="" name="picture" class="meat-picture"></td>
-							<td class="detail-title" id="comment-td" colspan="2">
+							<td rowspan="2" class="detail-title" id="comment-td" colspan="2">
 							<pre id="meat-description"></pre></td>
 						</tr>
 				<tfoot>
+					<tr><td colspan="4" id="cookingMenu-Image"></td></tr>
+					<tr><td colspan="4" id="cookingMenu-block"></td></tr>
 					<tr><td colspan="2"></td><td><div style="display: none" id="back-detail"><img src="${pageContext.request.contextPath}/img/details_return_button.png"></div></td></tr>
 				</tfoot>
 			</table>

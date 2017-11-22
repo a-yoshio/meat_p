@@ -56,11 +56,6 @@ public class MeatRepository {
 		return session.selectList("findAllLivestockData");
 	}
 	
-	/**畜種名から畜種IDを検索*/
-	public String getLivestockId(int livestockId) {
-		return session.selectOne("getLivestockName", livestockId);
-	}
-	
 	/**hardLevelData全件取得*/
 	public List<HardLevelData> findAllHardLevelData(){
 		return session.selectList("findAllHardLevelData");
