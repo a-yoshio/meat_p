@@ -66,6 +66,20 @@
 	color: rgba(255,255,255,0.6);
 	font-size: 30px;
 	font-family: cursive, "游ゴシック", sans-serif;
+	z-index: 50;
+	position: relative;
+}
+
+#click_me_box{
+	position: absolute;
+	top: 60%;
+	width: 120px;
+	height: auto;
+	z-index: 100;
+}
+
+#click_me_img{
+	width: 100%;
 }
 
 #part-headline{

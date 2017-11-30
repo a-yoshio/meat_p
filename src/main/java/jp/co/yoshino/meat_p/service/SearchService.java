@@ -38,8 +38,8 @@ public class SearchService {
 		List<Meat> conditionMatchList= new ArrayList<>();//重複なし、キーワード検索データ取得リスト
 		//複数のキーワードで、データを探す。
 		for(String key: keyList) {
+			System.out.println(key);
 			List<Meat> findList= meatrepository.findByKeyWord(key);
-			System.out.println(findList.size()+"件取得しました");
 			for(Meat meat: findList) {
 				if(!(conditionMatchList.contains(meat))) {
 					conditionMatchList.add(meat);

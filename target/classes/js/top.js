@@ -10,8 +10,8 @@ $(function(){
 		//部位マップ(白)の追加
 		var appendText='<div class="map-box">';
 		appendText+='<div id="part-title"><p style="display:inline">selectPart：</p><span id="part-name">全部</span></div>';
+		appendText+='<div id="click_me_box"><img src="'+pathName+'img/click_me.png" id="click_me_img"></div>';
 		appendText+='<img src="'+pathName+'img/'+Nowlivestock+'Map/'+Nowlivestock+'MapWhite.png" usemap="#'+Nowlivestock+'-map" id="'+Nowlivestock+'-map" alt="'+Nowlivestock+'" class="livestock-map">';
-		appendText+='</div>';
 		$('.illust-map-group').empty().append(appendText);
 		//戻るボタンの追加
 		var appendRetturnButton='<img src="'+pathName+'img/return_button.png" name="return" id="return">';
@@ -71,20 +71,17 @@ $(function(){
 			console.log(elementList);
 			var appendText= '';
 			var appendImage= '';
-			var titleList= elementList.titleList;
-			var imageElementList= elementList.imageElementList;
-			$.each(imageElementList,function(i,data){
+			$.each(elementList.imageElementList,function(i,data){
 				appendImage+= data;
 			});
 			$('#cookingMenu-Image').append(appendImage);
-			$.each(elementList,function(i,data){
+			$.each(elementList.titleList,function(i,data){
 				appendText+= data;
 			});
 			$('#cookingMenu-block').append(appendText);
 		});
 	};
 	
-	//TODO なんかイメージがだぶっています。。
 	
 	/**検索条件用畜種名とボタンを取得*/
 	$.getJSON(pathName+'rest/allLivestock', function(data){
