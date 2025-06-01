@@ -1,0 +1,19 @@
+{
+  "name": "MeatPad Dev Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "docker-in-docker": "latest",
+    "ghcr.io/devcontainers/features/java": {
+      "version": "24",
+      "installMaven": "true"
+    },
+    "ghcr.io/devcontainers/features/git": "latest"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  }
+}
